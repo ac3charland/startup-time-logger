@@ -21,8 +21,21 @@ if grep -Fq "$DATE" "$LOGFILE"; then
 else
     # If no entry for today in the hours log file, create one:
     echo 'Creating log for today in hours-log.txt:'
-    sh create-entry.sh $LOGFILE
+    sh helper-scripts/create-entry.sh $LOGFILE
     echo 'Done.'
+
+    echo '\n************************************************************************\n'
+
+    # Create calendar reminder for EOD
+    echo 'Creating calendar event for end of the current workday:'
+    osascript -l JavaScript helper-scripts/create-event.scpt
+
+    echo '\n************************************************************************\n'
+
+    # Create alert for calendar reminder
+    echo 'Creating alert for EoD calendar event:'
+    sleep 2
+    osascript -l JavaScript helper-scripts/create-alert.scpt
 fi
 
 echo '\n************************************************************************'
