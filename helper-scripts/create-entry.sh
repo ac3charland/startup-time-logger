@@ -50,4 +50,6 @@ LINE=$(printf "%-25s | %-10s | %-10s |\n" "$DATE" "$START_TIME" "$END_TIME")
 
 # Insert LINE on the third line of hours log
     # This way, entries are added in reverse chronological order and the most recent days are at the top.
-ex -s -c "3i|$LINE" -c x $1e
+sed -i '' "3i\\
+$LINE\\
+" $1
